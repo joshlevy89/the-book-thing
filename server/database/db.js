@@ -13,10 +13,10 @@ function db() {
             var url = 'PRODUCTION DBNAME HERE!';
 	    }
 	    else {
-            var url = 'mongodb://localhost:27017/DBNAME';
+            var url = 'mongodb://localhost:27017/the-book-thing';
 		}
-		var mongo = require('mongodb').MongoClient;
-		mongo.connect(url, function(err,db) {
+		var mongoose = require('mongoose');
+		mongoose.connect(url, function(err,db) {
 			db_singleton = db;
 			cb(err, db);
 			return

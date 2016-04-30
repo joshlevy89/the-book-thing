@@ -1,4 +1,4 @@
-function authenticate(app) {
+function authenticate(app,io) {
 
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
@@ -44,9 +44,20 @@ this.twitter_authentication = passport.authenticate('twitter')
 this.twitter_callback = app.get('/auth/return',
     passport.authenticate('twitter', { failureRedirect: '/' }),
     function(req, res) {
-       //var username = encodeURIComponent(req.user.username);
        res.redirect('/');
 })
+
+this.twitter_profile = app.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    io.on('connect', function(socket){
+      socket.emit('got_user_info', {user: req.user});
+    });
+    res.redirect('/');
+      //  res.send({
+  //    user: req.user
+  //  });
+});
 }
 
 module.exports = authenticate

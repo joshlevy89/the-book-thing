@@ -17,6 +17,10 @@ let store = createStore(
 
 // connect to socket io
 var socket = io.connect('/');
+socket.on('got_user_info', function(user) {
+	console.log(user);
+   // store.dispatch(update_places(updated_place))
+});
 
 export default class App extends Component {
   render() {

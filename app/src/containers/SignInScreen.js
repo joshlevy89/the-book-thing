@@ -4,12 +4,17 @@ import { connect } from 'react-redux';
 class SignInScreen extends Component {
     render() {
     var isProduction = process.env.NODE_ENV === 'production';
-    if (isProduction) var url = 'https://my-nightlife-coordinator.herokuapp.com/auth/twitter/'
-    else var url = 'http://127.0.0.1:3000/auth/twitter/'
+    if (isProduction) var url = 'https://my-nightlife-coordinator.herokuapp.com/';
+    else var url = 'http://127.0.0.1:3000/';
     return (
-         <a href={url}>
-         <button>Sign in with Twitter</button>
-         </a>
+         <div>
+            <a href={url+'auth/twitter/'}>
+            <button>Sign in with Twitter</button>
+            </a>
+            <a href={url+'profile'}>
+            <button>Check profile</button>
+            </a>
+         </div>
         )
     }
 }
