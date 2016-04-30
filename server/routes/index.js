@@ -6,8 +6,5 @@ module.exports = function(app, db, io) {
 		.get(authentication.twitter_authentication) 
 
 	app.route('/auth/twitter/return')
-		.get(authentication.twitter_callback)
-		
-	app.route('/profile')
-		.get(authentication.twitter_profile)
+		.get(authentication.twitter_callback)		
 }

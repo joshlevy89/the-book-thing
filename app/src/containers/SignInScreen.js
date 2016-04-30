@@ -11,9 +11,6 @@ class SignInScreen extends Component {
             <a href={url+'auth/twitter/'}>
             <button>Sign in with Twitter</button>
             </a>
-            <a href={url+'profile'}>
-            <button>Check profile</button>
-            </a>
          </div>
         )
     }

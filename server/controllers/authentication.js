@@ -44,20 +44,11 @@ this.twitter_authentication = passport.authenticate('twitter')
 this.twitter_callback = app.get('/auth/return',
     passport.authenticate('twitter', { failureRedirect: '/' }),
     function(req, res) {
+       io.on('connect', function(socket){
+        socket.emit('got_user_info', {user: req.user});
+       });
        res.redirect('/');
 })
-
-this.twitter_profile = app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    io.on('connect', function(socket){
-      socket.emit('got_user_info', {user: req.user});
-    });
-    res.redirect('/');
-      //  res.send({
-  //    user: req.user
-  //  });
-});
 }
 
 module.exports = authenticate
