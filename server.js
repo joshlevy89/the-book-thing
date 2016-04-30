@@ -4,6 +4,7 @@ var http = require('http').Server(app)
 var io = require('socket.io')(http)
 var database = require('./server/database/db.js')
 var db = new database();
+var routes = require('./server/routes/index.js');
 var passport = require('passport');
 
 var cors = require('cors')
@@ -41,7 +42,7 @@ if (!isProduction) {
 }
 
 db.dbConnect(function(err,db_instance){
-	//routes(app, db_instance, io)
+	routes(app, db_instance, io)
 })
 
 // It is important to catch any errors from the proxy or the
