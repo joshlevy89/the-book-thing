@@ -46,6 +46,7 @@ this.twitter_callback = app.get('/auth/return',
     function(req, res) {
        io.on('connect', function(socket){
         socket.emit('got_user_info', {user: req.user});
+        socket.disconnect();
        });
        res.redirect('/');
 })
