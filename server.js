@@ -1,3 +1,5 @@
+process.env.PWD = process.cwd(); // for production
+
 var express = require('express');
 var app = express();
 var http = require('http').Server(app)
@@ -42,7 +44,12 @@ if (!isProduction) {
 }
 
 db.dbConnect(function(err,db_instance){
-	routes(app, db_instance, io)
+  // initialize routes
+	routes(app, db_instance, io);   
+  // default route that will catch non-index calls
+  app.get('*', (req,res,next)=>{
+    res.sendFile(publicPath+'/index.html');
+  });
 })
 
 // It is important to catch any errors from the proxy or the

@@ -15,15 +15,14 @@ function db() {
 	    else {
             var url = 'mongodb://localhost:27017/the-book-thing';
 		}
-		var mongoose = require('mongoose');
-		mongoose.connect(url, function(err,db) {
+		var mongo = require('mongodb').MongoClient;
+		mongo.connect(url, function(err,db) {
 			db_singleton = db;
 			cb(err, db);
 			return
 		})
 	  }
 	}
-
 }
 
 module.exports = db;

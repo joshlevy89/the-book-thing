@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class SignInScreen extends Component {
+class SignInScreen extends Component {    
     render() {
     var isProduction = process.env.NODE_ENV === 'production';
     if (isProduction) var url = 'https://my-nightlife-coordinator.herokuapp.com/';
