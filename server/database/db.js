@@ -13,7 +13,7 @@ function db() {
             var url = 'PRODUCTION DBNAME HERE!';
 	    }
 	    else {
-            var url = 'LOCAL DBNAME HERE!';
+            var url = 'mongodb://localhost:27017/nightlifeApp';
 		}
 		var mongo = require('mongodb').MongoClient;
 		mongo.connect(url, function(err,db) {
