@@ -1,9 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class SignInScreen extends Component {
+class SignInScreen extends Component {
     render() {
-        return (
-            <h1>Hello, World!</h1>
+    var isProduction = process.env.NODE_ENV === 'production';
+    if (isProduction) var url = 'https://my-nightlife-coordinator.herokuapp.com/auth/twitter/'
+    else var url = 'http://127.0.0.1:3000/auth/twitter/'
+    return (
+         <a href={url}>
+         <button>Sign in with Twitter</button>
+         </a>
         )
     }
 }
+
+SignInScreen = connect()(SignInScreen)
+export default SignInScreen
+
