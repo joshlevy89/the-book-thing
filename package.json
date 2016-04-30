@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
+    "dev": "nodemon --watch server.js --watch ./server server.js & node ./webpack-server/bundle.js",
     "start": "node server.js",
+    "postinstall": "node deploy",
+    "prod-test": "NODE_ENV=production PORT=3000 node deploy.js && NODE_ENV=production PORT=3000 node server.js",
     "lint": "eslint src"
   },
   "repository": {
@@ -41,7 +44,24 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "http-proxy": "^1.13.2",
+    "mongodb": "^2.1.18",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4",
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.4.0",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.0.1",
+    "socket.io": "^1.4.5",
+    "socket.io-client": "^1.4.5"
   }
 }
