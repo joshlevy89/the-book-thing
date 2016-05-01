@@ -18,8 +18,8 @@ let store = createStore(
 
 // connect to socket io
 var socket = io.connect('/');
-socket.on('got_user_info', function(user) {
-   store.dispatch(update_login(user))
+socket.on('got_user_info', function(data) {
+   store.dispatch(update_login(data.user))
 });
 
 export default class App extends Component {

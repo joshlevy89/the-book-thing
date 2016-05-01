@@ -17,6 +17,7 @@ class NavBar extends Component{
 	    <Nav>
 	      	<NavItem onClick = {()=>browserHistory.push('/signin')} >Sign In</NavItem>
 	      	<NavItem onClick = {()=>browserHistory.push('/books')} >Books</NavItem>
+					<NavItem onClick = {()=>browserHistory.push('/mybooks')} >My Books</NavItem>
 	    </Nav>
   	</Navbar>
   	        {this.props.children}

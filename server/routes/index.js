@@ -12,5 +12,8 @@ module.exports = function(app, db, io) {
 		.get(authentication.twitter_callback)
 		
 	app.route('/get_all_books')
-		.get(book_actions.get_all_books)		
+		.get(book_actions.get_all_books)
+		
+	app.route('/add_book')
+		.post(book_actions.add_book)			
 }
