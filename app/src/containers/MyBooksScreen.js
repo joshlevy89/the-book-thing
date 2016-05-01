@@ -10,8 +10,18 @@ class MyBooksScreen extends Component {
     }
     
     componentDidMount() {
-        const { receive_my_books } = this.props
-        fetch('/get_my_books')
+        const { receive_my_books, user } = this.props
+        const body = {
+            user: user
+        }
+        fetch('/get_my_books', {
+			method: 'post',
+			headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json',
+		    },
+			body: JSON.stringify(body)
+		})
         .then(response => response.json())
       	.then(json => { 
             if (json.message === 'got_mybooks_successfully') {

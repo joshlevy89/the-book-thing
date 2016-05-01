@@ -18,6 +18,7 @@ class BooksScreen extends Component {
     const { books } = this.props
     return (
          <div>
+            <h2>All Books</h2>
             {books.map(entry=>{
                 return (
                 <span key={entry._id}>
