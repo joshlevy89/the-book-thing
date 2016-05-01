@@ -1,6 +1,6 @@
-export function update_login(user){
+export function update_user_info(user,mybooks){
     return {
-        type: 'UPDATE_LOGIN',
+        type: 'UPDATE_USER_INFO',
         user: user
     }
 }
@@ -12,8 +12,22 @@ export function receive_all_books(books) {
     }
 }
 
-export function try_add_book(book,user) {
+export function receive_my_books(books) {
     return (dispatch) => {
+        dispatch({
+            type: 'RECEIVE_MY_BOOKS',
+            mybooks: books
+        })
+    }
+}
+
+export function try_add_book(book,user) {
+    return (dispatch,getState) => {
+        // prevent addition if user not logged in
+        if (Object.keys(getState().user.user_info).length === 0) {
+            alert('Must be logged in to add a book!');
+            return;
+        }
         const body = {
             book: book,
             user: user

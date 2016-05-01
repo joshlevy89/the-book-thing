@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import io from 'socket.io-client';
 import routes from './routes/index'
 import reducers from './reducers';
-import { update_login } from './actions'
+import { update_user_info } from './actions'
 var isProduction = process.env.NODE_ENV === 'production';
 const middleware = isProduction ? [ thunk ]:[thunk, logger()];
 
@@ -19,7 +19,7 @@ let store = createStore(
 // connect to socket io
 var socket = io.connect('/');
 socket.on('got_user_info', function(data) {
-   store.dispatch(update_login(data.user))
+   store.dispatch(update_user_info(data.user))
 });
 
 export default class App extends Component {

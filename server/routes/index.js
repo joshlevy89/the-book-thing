@@ -14,6 +14,9 @@ module.exports = function(app, db, io) {
 	app.route('/get_all_books')
 		.get(book_actions.get_all_books)
 		
+	app.route('/get_my_books')
+		.get(book_actions.get_my_books)
+		
 	app.route('/add_book')
 		.post(book_actions.add_book)			
 }

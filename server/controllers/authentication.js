@@ -2,6 +2,7 @@ function authenticate(app,io) {
 
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -45,6 +46,7 @@ this.twitter_callback = app.get('/auth/return',
     passport.authenticate('twitter', { failureRedirect: '/' }),
     function(req, res) {
        io.on('connect', function(socket){
+        // retrieve user's info from database
         socket.emit('got_user_info', {user: req.user});
         socket.disconnect();
        });

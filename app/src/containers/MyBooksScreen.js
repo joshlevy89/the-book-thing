@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { try_add_book } from '../actions'
+import { try_add_book, receive_my_books } from '../actions'
 
 class MyBooksScreen extends Component {
     
     constructor(props) {
         super(props);
         this.state = { booklist: [] }
+    }
+    
+    componentDidMount() {
+        const { receive_my_books } = this.props
+        fetch('/get_my_books')
+        .then(response => response.json())
+      	.then(json => { 
+            if (json.message === 'got_mybooks_successfully') {
+                receive_my_books(json.books)
+            }
+          })
     }
   
     handleTitleInputChange(e,val) {
@@ -23,10 +34,16 @@ class MyBooksScreen extends Component {
     }
     
     render() {
-    const { try_add_book, user} = this.props
+    const { try_add_book, user, mybooks} = this.props
     return (
          <div>
-         Search by title: 
+         <h2>My Books</h2>
+         {mybooks.map(entry=>{
+           return (<span key={entry._id}>
+                    <img src={entry.book.book_info.volumeInfo.imageLinks.smallThumbnail} height='200px' width='140px'/>
+                  </span>)
+         })}
+         <div>Search by title: </div>
          <input ref="titleInput" 
          onKeyDown={e=>this.handleTitleInputChange(e,this.refs.titleInput.value)}/>
          <div>
@@ -42,13 +59,14 @@ class MyBooksScreen extends Component {
 
 function mapStateToProps(state){
     return {
-        user: state.user
+        user: state.user,
+        mybooks: state.user.mybooks
     }
 }
 
 MyBooksScreen = connect(
 mapStateToProps,
-{ try_add_book }
+{ try_add_book, receive_my_books }
 )(MyBooksScreen)
 export default MyBooksScreen
 

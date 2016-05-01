@@ -2,9 +2,13 @@ import { combineReducers } from 'redux';
 
 export function user(state={user_info: {}, mybooks: []},action) {
     switch (action.type) {
-        case 'UPDATE_LOGIN':
+        case 'UPDATE_USER_INFO':
             return Object.assign({},state,{
                 user_info: action.user
+            })
+        case 'RECEIVE_MY_BOOKS':
+            return Object.assign({},state,{
+                mybooks: action.mybooks
             })
         case 'ADD_BOOK':
            state.mybooks.push(action.book);
