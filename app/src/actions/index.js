@@ -1,9 +1,31 @@
 export function update_user_info(user,mybooks){
-    return {
+       return {
         type: 'UPDATE_USER_INFO',
         user: user
-    }
+       };
 }
+
+export function update_mybooks(user) {
+    return (dispatch) => {
+        const body = {
+            user: user
+        }
+        fetch('/get_my_books', {
+			method: 'post',
+			headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json',
+		    },
+			body: JSON.stringify(body)
+		})
+        .then(response => response.json())
+      	.then(json => { 
+            if (json.message === 'got_mybooks_successfully') {
+                dispatch(receive_my_books(json.books))
+            }
+         })
+    }
+}       
 
 export function receive_all_books(books) {
     return {
@@ -13,12 +35,10 @@ export function receive_all_books(books) {
 }
 
 export function receive_my_books(books) {
-    return (dispatch) => {
-        dispatch({
+        return {
             type: 'RECEIVE_MY_BOOKS',
             mybooks: books
-        })
-    }
+        }
 }
 
 export function try_add_book(book,user) {

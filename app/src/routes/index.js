@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router'
 import SignInScreen from '../containers/SignInScreen'
 import BooksScreen from '../containers/BooksScreen'
 import MyBooksScreen from '../containers/MyBooksScreen'
+import ProposeTradeScreen from '../containers/ProposeTradeScreen'
 import NavBar from '../containers/NavBar'
 
 module.exports = (
@@ -11,5 +12,6 @@ module.exports = (
     <Route path="/signin" component={SignInScreen}/>
     <Route path="/books" component={BooksScreen}/>
     <Route path="/mybooks" component={MyBooksScreen}/>
+    <Route path="/propose-trade/:bookId" component={ProposeTradeScreen}/>
 </Route>
 )

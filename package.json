@@ -47,12 +47,14 @@
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.1",
     "cors": "^2.7.1",
+    "css-loader": "^0.23.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "http-proxy": "^1.13.2",
     "mongodb": "^2.1.18",
     "mongoose": "^4.4.14",
     "morgan": "^1.7.0",
+    "node-sass": "^3.6.0",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
     "react": "^0.14.6",
@@ -63,8 +65,10 @@
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
+    "sass-loader": "^3.2.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
+    "style-loader": "^0.13.1",
     "webpack": "^1.12.2"
   }
 }

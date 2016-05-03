@@ -11,7 +11,7 @@ function book_actions(app,db,io) {
     }
     
     this.get_my_books = function(req, res) {
-        var username = req.body.user.user_info.username;        
+        var username = req.body.user.username;        
         var allBooks = db.collection('allBooks')
         allBooks.find({"book.user_info.username":username}).toArray(function(err,docs){
         res.json({

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { receive_all_books } from '../actions'
+import BookList from '../components/BookList';
 
 class BooksScreen extends Component {
     componentDidMount() {
@@ -19,13 +20,7 @@ class BooksScreen extends Component {
     return (
          <div>
             <h2>All Books</h2>
-            {books.map(entry=>{
-                return (
-                <span key={entry._id}>
-                    <img src={entry.book.book_info.volumeInfo.imageLinks.smallThumbnail} height='200px' width='140px'/>
-                </span>
-                )
-            })}
+            <BookList books={books} overlayType={'standard'}/>
          </div>
         )
     }
