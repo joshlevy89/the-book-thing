@@ -3,12 +3,12 @@ import Book from './Book';
 
 class BookList extends Component {
     render() {
-        const { books, overlayType } = this.props
+        const { booklist } = this.props
         return (
          <div>
-         {books.map(entry=>{
+         {booklist.map(entry=>{
             return (
-              <Book key={entry._id} entry={entry} {...this.props}/>
+              <Book key={entry._id} entryId={entry._id} {...this.props}/>
             )
         })}  
         </div>

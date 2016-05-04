@@ -7,7 +7,8 @@ import BookList from '../components/BookList';
 class ProposeTradeScreen extends Component {
     
 render() {
-    const { books, mybooks } = this.props;
+    const { books, user } = this.props;
+    var mybooks = user.mybooks;
     var bookId = this.props.params.bookId;
     // get the book offered/requested
     var book = books.filter(book=> {
@@ -33,9 +34,9 @@ render() {
     return (
          <div>
          {isBookInLibrary ? <h2>Book Offered</h2>:<h2>Book Requested</h2>}
-         <BookList books = {book} overlayType={'standard'}/>
+         <BookList booklist = {book} overlayType={'standard'} {...this.props}/>
          <h2>Select one of your books to trade</h2>
-         <BookList books = {booksToChooseFrom} overlayType={'trade'}/>
+         <BookList booklist = {booksToChooseFrom} overlayType={'trade'} {...this.props}/>
          </div>
         )
     }
@@ -45,7 +46,8 @@ render() {
 function mapStateToProps(state) {
     return {
         mybooks: state.user.mybooks,
-        books: state.books
+        books: state.books,
+        user: state.user
     }
 }
 

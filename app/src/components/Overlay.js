@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
- 
+import { start_trade, try_add_trade } from '../actions'
+
 class Overlay extends Component {
     render() {
-        const { entry,mybooks, overlayType } = this.props
+        const { dispatch, entry, overlayType, user } = this.props
         var entryId = entry._id;
         // check if this entry is in the user's library
-        var isBookInLibrary = mybooks.filter(book=> {
+        var isBookInLibrary = user.mybooks.filter(book=> {
              return book._id===entryId
         }).length > 0;
         if (isBookInLibrary) var str = 'Offer This Book';
@@ -15,10 +16,16 @@ class Overlay extends Component {
         return (
             <span>
                {overlayType === 'standard' ? 
-                        <button onClick = {()=>browserHistory.push('/propose-trade/'+entryId)}>
+                        <button onClick = {()=>{
+                            browserHistory.push('/propose-trade/'+entryId);
+                            dispatch(start_trade(entryId));
+                        }}>
                         { isBookInLibrary ? 'Offer This Book':'Request This Book' }
                         </button>:
-                        <button onClick = {()=>browserHistory.push('/propose-trade/'+entryId)}>
+                        <button onClick = {()=>{
+                            browserHistory.push('/mytrades/');
+                            dispatch(try_add_trade(entryId,user));
+                            }}>
                         { isBookInLibrary ? 'Trade away this book':'Trade for this book' }
                         </button>
                }
@@ -29,11 +36,9 @@ class Overlay extends Component {
 
 function mapStateToProps(state) {
     return {
-        mybooks: state.user.mybooks
+        user: state.user
     }
 }
 
-Overlay = connect(
-    mapStateToProps
-)(Overlay)
+Overlay = connect(mapStateToProps)(Overlay)
 export default Overlay

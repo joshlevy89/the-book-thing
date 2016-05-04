@@ -18,5 +18,17 @@ module.exports = function(app, db, io) {
 		.post(book_actions.get_my_books)
 		
 	app.route('/add_book')
-		.post(book_actions.add_book)			
+		.post(book_actions.add_book)
+		
+	app.route('/get_my_trades')
+		.post(book_actions.get_my_trades)
+		
+	app.route('/get_trade_offers')
+		.post(book_actions.get_trade_offers)
+		
+	app.route('/add_trade')
+		.post(book_actions.add_trade)	
+		
+	app.route('/delete_trade')
+		.post(book_actions.delete_trade)		
 }

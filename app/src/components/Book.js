@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Overlay from './Overlay';
+import { connect } from 'react-redux';
 require('../../styles/Book.scss')
 
 class Book extends Component {
@@ -10,7 +11,11 @@ class Book extends Component {
     }
     
     render() {
-     const {entry} = this.props
+     const {entryId, books } = this.props
+     // find entry for this book
+     var entry = books.filter(book=>{
+         return book._id === entryId
+     })[0];
      return (
         <span className="entry">
             <span  

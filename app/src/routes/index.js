@@ -4,6 +4,9 @@ import SignInScreen from '../containers/SignInScreen'
 import BooksScreen from '../containers/BooksScreen'
 import MyBooksScreen from '../containers/MyBooksScreen'
 import ProposeTradeScreen from '../containers/ProposeTradeScreen'
+import MyTradesScreen from '../containers/MyTradesScreen'
+import TradeOffersScreen from '../containers/TradeOffersScreen'
+
 import NavBar from '../containers/NavBar'
 
 module.exports = (
@@ -13,5 +16,7 @@ module.exports = (
     <Route path="/books" component={BooksScreen}/>
     <Route path="/mybooks" component={MyBooksScreen}/>
     <Route path="/propose-trade/:bookId" component={ProposeTradeScreen}/>
+    <Route path="/mytrades" component={MyTradesScreen}/>
+    <Route path="/trade-offers" component={TradeOffersScreen}/>
 </Route>
 )

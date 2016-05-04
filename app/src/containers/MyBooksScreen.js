@@ -24,11 +24,11 @@ class MyBooksScreen extends Component {
     }
     
     render() {
-    const { try_add_book, user, mybooks} = this.props
+    const { try_add_book, user } = this.props
     return (
          <div>
          <h2>My Books</h2>
-         <BookList books={mybooks} overlayType={'standard'}/>
+         <BookList booklist={user.mybooks} overlayType={'standard'} {...this.props}/>
          <div>Search by title: </div>
          <input ref="titleInput" 
          onKeyDown={e=>this.handleTitleInputChange(e,this.refs.titleInput.value)}/>
@@ -46,7 +46,7 @@ class MyBooksScreen extends Component {
 function mapStateToProps(state){
     return {
         user: state.user,
-        mybooks: state.user.mybooks
+        books: state.books
     }
 }
 
