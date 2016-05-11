@@ -9,7 +9,8 @@ app.use(passport.session());
 var isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   var credentials = {
-    // MUST ADD CREDENTIALS FOR PRODUCTION
+    consumerKey: "4Ohc3xVuGnz6JKG6T6hpTuQZa",
+    consumerSecret: "rcplpTLAh42rpZsb2KguQ4Co0QmGQg7DGHqotVwditRl1yLAv4"
   }
 }
 else {
