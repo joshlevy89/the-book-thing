@@ -14,7 +14,7 @@ class Overlay extends Component {
         if (isBookInLibrary) var str = 'Offer This Book';
         else var str = 'Request This Book';
         return (
-            <span>
+            <span style={{'float':'left'}}>
                {overlayType === 'standard' ? 
                         <button onClick = {()=>{
                             browserHistory.push('/propose-trade/'+entryId);

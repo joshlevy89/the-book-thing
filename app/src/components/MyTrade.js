@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Book from './Book';
 import { connect } from 'react-redux';
-import { reject_trade } from '../actions'
+import { reject_trade, accept_trade } from '../actions';
+import { Button } from 'react-bootstrap';
+
 
 class MyTrade extends Component {
     render() {
-        const { mytrade, mybooks, reject_trade } = this.props;
+        const { mytrade, mybooks, reject_trade, accept_trade, tradeType } = this.props;
         var firstItem = mytrade.trade.trade_info.firstItem;
         var secondItem = mytrade.trade.trade_info.secondItem;        
         // always list book in your library first...
@@ -24,11 +26,15 @@ class MyTrade extends Component {
              
         return (
             <div>
-                Trade this book
                 <Book key={firstShow} entryId={firstShow} overlayType={'standard'} {...this.props}/>
-                For This book
+                <img style={{'text-align':'center'}} src='https://image.freepik.com/free-icon/exchange-arrows_318-42193.png' width='20px' height='20px'/>
                 <Book key={secondShow} entryId={secondShow} overlayType={'standard'} {...this.props}/>
-                <button onClick={()=>reject_trade(mytrade)}>Delete</button>
+                {tradeType==='offer' ?
+                <span>
+                <Button bsStyle="success" onClick={()=>reject_trade(mytrade)}>Delete</Button>
+                <Button bsStyle="danger" onClick={()=>accept_trade(mytrade)}>Accept</Button>
+                </span>
+                :<span></span>}
             </div>
         )
     }
@@ -43,6 +49,6 @@ function mapStateToProps(state){
 
 MyTrade = connect(
     mapStateToProps,
-    { reject_trade }
+    { reject_trade, accept_trade }
 )(MyTrade)
 export default MyTrade

@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MyTrade from '../components/MyTrade'
+import MyTrade from '../components/MyTrade';
+require('../../styles/index.scss');
+
 
 class MyTradesScreen extends Component {
     render() {
         const { mytrades } = this.props
         return (
-        <div>
+        <div style={{'marginLeft':'10px'}}>
+         <h2 className="mainLayout">Proposed Trades</h2>
         {mytrades.map(mytrade=>{
             return (
-            <div key={mytrade._id}>
-                <MyTrade mytrade={mytrade}/>
+            <div style={{'margin-bottom':'10px'}} key={mytrade._id}>
+                <MyTrade mytrade={mytrade} tradeType={'proposal'}/>
             </div>
             )
         })}

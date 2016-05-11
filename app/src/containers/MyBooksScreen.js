@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { try_add_book  } from '../actions'
 import BookList from '../components/BookList';
+require('../../styles/index.scss');
 
 class MyBooksScreen extends Component {
     
@@ -26,16 +27,19 @@ class MyBooksScreen extends Component {
     render() {
     const { try_add_book, user } = this.props
     return (
-         <div>
+         <div className="mainLayout" style = {{'margin-left':'10px'}}>
          <h2>My Books</h2>
          <BookList booklist={user.mybooks} overlayType={'standard'} {...this.props}/>
+         <hr/>
+         <div style={{'margin-bottom': '20px', 'margin-top':'20px'}}>
          <div>Search by title: </div>
          <input ref="titleInput" 
          onKeyDown={e=>this.handleTitleInputChange(e,this.refs.titleInput.value)}/>
-         <div>
+         </div>
+        <div>
          {this.state.booklist.map(book=>{
-           return <span key={book.id} onClick = {() => try_add_book(book,user)
-           }><img src={book.volumeInfo.imageLinks.smallThumbnail} height='200px' width='140px'/></span>
+           return <a href='#' style={{'marginLeft': '10px', 'margin-top': '10px'}} key={book.id} onClick = {() => try_add_book(book,user)
+           }><img src={book.volumeInfo.imageLinks.smallThumbnail} height='200px' width='140px'/></a>
          })}
          </div>
          </div>

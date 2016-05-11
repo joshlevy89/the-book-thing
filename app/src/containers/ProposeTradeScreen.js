@@ -4,6 +4,7 @@ import MyBooksScreen from './MyBooksScreen';
 import BooksScreen from './BooksScreen';
 import BookList from '../components/BookList';
 
+
 class ProposeTradeScreen extends Component {
     
 render() {
@@ -35,7 +36,7 @@ render() {
          <div>
          {isBookInLibrary ? <h2>Book Offered</h2>:<h2>Book Requested</h2>}
          <BookList booklist = {book} overlayType={'standard'} {...this.props}/>
-         <h2>Select one of your books to trade</h2>
+         {isBookInLibrary ? <h2>Select Book To Trade For</h2>:<h2>Select Book To Trade Away</h2>}
          <BookList booklist = {booksToChooseFrom} overlayType={'trade'} {...this.props}/>
          </div>
         )

@@ -17,7 +17,7 @@ class Book extends Component {
          return book._id === entryId
      })[0];
      return (
-        <span className="entry">
+        <span style={{'margin-left':'5px', 'margin-right':'5px'}} className="entry">
             <span  
             onMouseEnter= {()=>{this.setState({mouseHovering: true})}}
             onMouseLeave= {()=>{this.setState({mouseHovering: false})}}

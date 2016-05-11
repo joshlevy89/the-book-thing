@@ -1,3 +1,54 @@
+export function update_user_details(fieldName,value){
+    return (dispatch,getState) => {
+     const body = {
+            user: getState().user.user_info,
+            fieldName: fieldName,
+            value: value
+        }
+    // add to db
+    fetch('/update_user_details', {
+        method: 'post',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+    })
+    // update state
+    dispatch({
+        type: 'UPDATE_USER_DETAILS',
+        fieldName: fieldName,
+        value: value
+    })
+    }
+}
+
+export function retrieve_user_details(){
+    return (dispatch,getState) => {
+        const body = {
+            user: getState().user.user_info
+        }
+            // add to db
+        fetch('/retrieve_user_details', {
+            method: 'post',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+        .then(response => response.json())
+        .then(json => { 
+            if (json.message === 'got_details_successfully') {
+                dispatch({
+                    type: 'RECEIVE_USER_DETAILS',
+                    details: json.details
+                })
+            }
+         })
+    }
+}
+
 export function update_user_info(user,mybooks){
        return {
         type: 'UPDATE_USER_INFO',
@@ -5,10 +56,10 @@ export function update_user_info(user,mybooks){
        };
 }
 
-export function update_mybooks(user) {
-    return (dispatch) => {
+export function update_mybooks() {
+    return (dispatch,getState) => {
         const body = {
-            user: user
+            user: getState().user.user_info
         }
         fetch('/get_my_books', {
 			method: 'post',
@@ -82,10 +133,10 @@ export function receive_book(book){
     }
 }
 
-export function update_mytrades(user) {
-    return (dispatch) => {
+export function update_mytrades() {
+    return (dispatch,getState) => {
         const body = {
-            user: user
+            user: getState().user.user_info
         }
         fetch('/get_my_trades', {
 			method: 'post',
@@ -104,10 +155,10 @@ export function update_mytrades(user) {
     }
 }         
 
-export function update_trade_offers(user) {
-    return (dispatch) => {
+export function update_trade_offers() {
+    return (dispatch,getState) => {
         const body = {
-            user: user
+            user: getState().user.user_info
         }
         fetch('/get_trade_offers', {
 			method: 'post',
@@ -166,11 +217,15 @@ export function try_add_trade(entryId,user) {
             return book._id === checkItem
         })[0];
         var otherUser = entry.book.user_info;
+        var bookIdOfProposer;
+        if (isFirstItemInLibrary) bookIdOfProposer = firstItem;
+        else bookIdOfProposer = secondItem;
         
         const body = {
             trade: trade,
             user: user,
-            otherUser: otherUser
+            otherUser: otherUser,
+            bookIdOfProposer: bookIdOfProposer 
         }
         fetch('/add_trade', {
 			method: 'post',
@@ -210,6 +265,32 @@ export function reject_trade(trade){
             },
             body: JSON.stringify(body)
         })
+    }
+}
+
+export function accept_trade(trade){
+    return (dispatch,getState)=> {
+        const body = {
+        trade: trade,
+        user: getState().user
+        }
+        fetch('/accept_trade', {
+            method: 'post',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+    }
+}
+
+// following socketio accept trade, swap books (and delete_trade
+// trade are called)
+export function swap_books(trade){
+    return {
+        type: 'SWAP_BOOKS',
+        trade: trade
     }
 }
 

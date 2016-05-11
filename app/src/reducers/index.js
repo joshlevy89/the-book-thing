@@ -1,10 +1,24 @@
 import { combineReducers } from 'redux';
 
-export function user(state={user_info: {}, mybooks: [], mytrades: []},action) {
+export function user(state={user_info: {}, mybooks: [], mytrades: [], user_details:{}},action) {
     switch (action.type) {
         case 'UPDATE_USER_INFO':
             return Object.assign({},state,{
                 user_info: action.user
+            })
+        case 'UPDATE_USER_DETAILS':
+            var fieldName = action.fieldName;
+            var new_details = Object.assign({},state.user_details,{});
+            new_details[fieldName] = action.value;
+            return Object.assign({},state,{
+                user_details: new_details
+            })
+            return new_state
+        case 'RECEIVE_USER_DETAILS':
+            var details = action.details;
+
+            return Object.assign({},state,{
+                user_details: details
             })
         case 'RECEIVE_MY_BOOKS':
             return Object.assign({},state,{
@@ -77,6 +91,22 @@ export function user(state={user_info: {}, mybooks: [], mytrades: []},action) {
         else {
             return state
         }
+        case 'ACCEPT_TRADE':
+        //  // note that delete trade is handled in a separate call
+        //  var firstItem = action.trade.trade.trade_info.firstItem;
+        //  var secondItem = action.trade.trade.trade_info.secondItem;
+        //  // check if items are in library
+        //  var isFirstItemInLibrary = state.mybooks.filter(book=> {
+        //      return book._id===firstItem
+        //  }).length > 0;
+        //  var isSecondItemInLibrary = state.mybooks.filter(book=> {
+        //      return book._id===secondItem
+        //  }).length > 0;
+        //  // if neither in library, make no changes
+        //  if (action.trade.trade.user_info.username===state.user_info.username){
+        //      // check if first item is 
+        //  }
+        return state
         default: 
             return state;
     }

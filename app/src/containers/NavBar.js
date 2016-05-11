@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Navbar, NavItem, Nav } from 'react-bootstrap';
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux' 
+require('../../styles/index.scss')
+
 
 class NavBar extends Component{
   render() {
@@ -20,6 +22,7 @@ class NavBar extends Component{
 					<NavItem onClick = {()=>browserHistory.push('/mybooks')} >My Books</NavItem>
 				  <NavItem onClick = {()=>browserHistory.push('/mytrades')} >Proposed Trades</NavItem>
 					<NavItem onClick = {()=>browserHistory.push('/trade-offers')} >Trade Offers</NavItem>
+					<NavItem onClick = {()=>browserHistory.push('/user-details')}>Profile</NavItem>
 	    </Nav>
   	</Navbar>
   	        {this.props.children}

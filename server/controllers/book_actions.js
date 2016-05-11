@@ -48,10 +48,12 @@ function book_actions(app,db,io) {
         var trade_info = req.body.trade;
         var user_info = req.body.user.user_info;
         var otherUser = req.body.otherUser;
+        var bookIdOfProposer = req.body.bookIdOfProposer;
         var trade = {
             trade_info: trade_info,
             user_info: user_info,
-            otherUser: otherUser
+            otherUser: otherUser,
+            bookIdOfProposer: bookIdOfProposer
         }
        allTrades.insert({trade: trade}, function (err,doc){
             io.sockets.emit('trade_added', {
@@ -74,6 +76,79 @@ function book_actions(app,db,io) {
             })
             res.end();
         });
+    }
+    
+   this.accept_trade = function(req,res) {
+        var allTrades = db.collection('allTrades');
+        var trade = req.body.trade;
+        var user = req.body.user;
+        var tradeId = req.body.trade._id;
+        var atrade = trade.trade;
+        var ObjectId = require('mongodb').ObjectID;
+        // swap the books
+        var allBooks = db.collection('allBooks')
+        var firstItem = atrade.trade_info.firstItem;
+        var secondItem = atrade.trade_info.secondItem;
+        var bookIdOfProposer = atrade.bookIdOfProposer;
+        var ownerUserInfo = atrade.user_info;
+        var otherUserInfo = atrade.otherUser;
+        // does the first item belong to the proposer?
+        var userOwnsFirstItem = bookIdOfProposer === firstItem;
+        if (userOwnsFirstItem) {
+            // find the book with the firstItem id and give it the otherUser info
+            allBooks.update({'_id':ObjectId(firstItem)},{
+                $set: {
+                    'book.user_info': otherUserInfo
+                }
+            })
+            // find the book with secondItem id and give it the owner's info
+            allBooks.update({'_id':ObjectId(secondItem)},{
+                $set: {
+                    'book.user_info': ownerUserInfo
+                }
+            }, function(err,docs){
+                 io.sockets.emit('trade_accepted',{
+                    user: user
+                 });
+            })
+        }
+        else {
+             // find the book with the secondItem id and give it the otherUser info
+               allBooks.update({'_id':ObjectId(secondItem)},{
+                $set: {
+                    'book.user_info': otherUserInfo
+                }
+            })
+            // find the book with firstItem id and give it the owner's info
+            allBooks.update({'_id':ObjectId(firstItem)},{
+                $set: {
+                    'book.user_info': ownerUserInfo
+                }
+            }, function(err,docs){
+                 io.sockets.emit('trade_accepted',{
+                    user: user
+                 });
+            })
+        }
+        
+        // delete all other trades involving either of these books
+        allTrades.remove({'trade.trade_info.firstItem': firstItem});
+        allTrades.remove({'trade.trade_info.firstItem': secondItem});
+        allTrades.remove({'trade.trade_info.secondItem': secondItem});
+        allTrades.remove({'trade.trade_info.secondItem': firstItem});
+        res.end();
+
+        
+        // delete trade (would like to just reference the 
+        // already existent function but can't figure out syntax)
+    //    var tradeId = trade._id;
+    //    allTrades.remove({'_id': ObjectId(tradeId)}, function (err,doc){
+    //         io.sockets.emit('trade_deleted', {
+    //              message: 'trade_deleted_successfully',
+    //              trade: trade
+    //         })
+    //         res.end();
+    //     });
     }
     
     
