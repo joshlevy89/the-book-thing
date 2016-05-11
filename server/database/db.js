@@ -10,7 +10,7 @@ function db() {
 	  else {
 	  	var isProduction = process.env.NODE_ENV === 'production';
 	  	if (isProduction) {
-            var url = 'PRODUCTION DBNAME HERE!';
+	  		var url = 'mongodb://joshlevy89:Born=1989@ds019472.mlab.com:19472/heroku_7xdw2lfc';
 	    }
 	    else {
             var url = 'mongodb://localhost:27017/the-book-thing';
