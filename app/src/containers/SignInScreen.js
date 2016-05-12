@@ -6,12 +6,6 @@ require('../../styles/index.scss');
 
 
 class SignInScreen extends Component {    
-   componentDidMount() {
-       const { user } = this.props
-        const { dispatch } = this.props
-        // get the books on site load
-       // dispatch(update_books());
-    }
     
 render() {
     var isProduction = process.env.NODE_ENV === 'production';
