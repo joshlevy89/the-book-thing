@@ -32,15 +32,15 @@ class UserField extends Component {
             <div>
             {editable ?
 			 (
-            <div><label style={{width:'100px','text-align':'center'}}>{label}</label><input ref={label}
+            <div><label style={{width:'100px','textAlign':'center'}}>{label}</label><input ref={label}
                 style={{width:'200px'}}
                 onKeyPress={e=>this.handleKeyPress(this.refs[label].value,e.key,Object.keys(this.refs)[0])}
                 defaultValue={user_details[label]}/>
             </div>
             ):(
             <div>
-            <label style={{width:'100px','text-align':'center'}}>{label}</label>
-            <label style={{width:'200px','text-align': 'center'}}>{ user_details[label] }</label>
+            <label style={{width:'100px','textAlign':'center'}}>{label}</label>
+            <label style={{width:'200px','textAlign': 'center'}}>{ user_details[label] }</label>
             <span style={{width:'50px'}}><button onClick = {()=>this.setState({editing: true})}>Edit</button></span>
             </div>
             )

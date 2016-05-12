@@ -17,7 +17,7 @@ class MyTradesScreen extends Component {
         }
         {mytrades.map(mytrade=>{
             return (
-            <div style={{'margin-bottom':'10px'}} key={mytrade._id}>
+            <div style={{'marginBottom':'10px'}} key={mytrade._id}>
                 <MyTrade mytrade={mytrade} tradeType={'proposal'}/>
             </div>
             )

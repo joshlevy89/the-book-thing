@@ -7,9 +7,9 @@ require('../../styles/index.scss');
 
 class TradeOffersScreen extends Component {
     render() {
-        const { trade_offers } = this.props
+        var { trade_offers } = this.props
         if (trade_offers === undefined) {
-            return (<div></div>)
+            trade_offers = [];
         }
         return (
         <div style={{'marginLeft':'10px'}}>
@@ -21,7 +21,7 @@ class TradeOffersScreen extends Component {
         }
         {trade_offers.map(mytrade=>{
             return (
-            <div style={{'margin-bottom':'10px'}} key={mytrade._id}>
+            <div style={{'marginBottom':'10px'}} key={mytrade._id}>
                 <MyTrade mytrade={mytrade} tradeType={'offer'}/>
             </div>
             )

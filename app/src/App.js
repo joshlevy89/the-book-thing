@@ -20,6 +20,9 @@ let store = createStore(
 
 // connect to socket io
 var socket = io.connect('/');
+socket.on('book_added', function(data) {
+  store.dispatch(receive_book(data.book))
+});
 socket.on('got_user_info', function(data) {
    store.dispatch(update_books());
    store.dispatch(update_user_info(data.user));
@@ -28,21 +31,18 @@ socket.on('got_user_info', function(data) {
    store.dispatch(update_trade_offers());
    store.dispatch(retrieve_user_details());
 });
-socket.on('book_added', function(data) {
-  store.dispatch(receive_book(data.book))
-})
 socket.on('trade_added', function(data) {
   store.dispatch(receive_trade(data.trade))
-})
+});
 socket.on('trade_deleted', function(data){
   store.dispatch(delete_trade(data.trade))
-})
+});
 socket.on('trade_accepted', function(data){
   store.dispatch(update_books());
   store.dispatch(update_mybooks());
   store.dispatch(update_mytrades());
   store.dispatch(update_trade_offers());
-})
+});
 
 
 export default class App extends Component {

@@ -9,8 +9,13 @@ class BooksScreen extends Component {
     render() {
     const { books } = this.props
     return (
-         <div style = {{'margin-left':'10px'}} className="mainLayout">
+         <div style = {{'marginLeft':'10px'}} className="mainLayout">
             <h2>All Books</h2>
+            {books.length===0 ? 
+            <div style={{'marginLeft': '20px'}} className="mainLayout">
+            No books have been uploaded yet</div>:
+            <div></div>
+            }
             <BookList booklist={books} {...this.props} overlayType={'standard'}/>
          </div>
         )
