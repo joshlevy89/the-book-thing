@@ -29,7 +29,9 @@ class MyBooksScreen extends Component {
     return (
          <div className="mainLayout" style = {{'margin-left':'10px'}}>
          <h2>My Books</h2>
-         <BookList booklist={user.mybooks} overlayType={'standard'} {...this.props}/>
+         {user.mybooks.length!==0 ?
+            <div><BookList booklist={user.mybooks} overlayType={'standard'} {...this.props}/></div>
+            :<div style={{'marginLeft':'20px'}}>Search for books below</div>}
          <hr/>
          <div style={{'margin-bottom': '20px', 'margin-top':'20px'}}>
          <div>Search by title: </div>
@@ -38,6 +40,7 @@ class MyBooksScreen extends Component {
          </div>
         <div>
          {this.state.booklist.map(book=>{
+            console.log(book);
            return <a href='#' style={{'marginLeft': '10px', 'margin-top': '10px'}} key={book.id} onClick = {() => try_add_book(book,user)
            }><img src={book.volumeInfo.imageLinks.smallThumbnail} height='200px' width='140px'/></a>
          })}

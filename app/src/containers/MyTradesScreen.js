@@ -10,6 +10,11 @@ class MyTradesScreen extends Component {
         return (
         <div style={{'marginLeft':'10px'}}>
          <h2 className="mainLayout">Proposed Trades</h2>
+        {mytrades.length===0 ? 
+            <div style={{'marginLeft': '20px'}} className="mainLayout">
+            You Have Not Offered Any Trades</div>:
+            <div></div>
+        }
         {mytrades.map(mytrade=>{
             return (
             <div style={{'margin-bottom':'10px'}} key={mytrade._id}>
