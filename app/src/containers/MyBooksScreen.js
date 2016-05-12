@@ -40,7 +40,7 @@ class MyBooksScreen extends Component {
          </div>
         <div>
          {this.state.booklist.map(book=>{
-            console.log(book);
+           if (book.volumeInfo.imageLinks === undefined) { return }
            return <a href='#' style={{'marginLeft': '10px', 'margin-top': '10px'}} key={book.id} onClick = {() => try_add_book(book,user)
            }><img src={book.volumeInfo.imageLinks.smallThumbnail} height='200px' width='140px'/></a>
          })}
