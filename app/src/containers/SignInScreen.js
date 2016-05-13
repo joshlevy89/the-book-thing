@@ -21,7 +21,7 @@ render() {
             <i style={{'marginLeft':'5px'}} className="fa fa-twitter"></i>
             </Button>
             </a>
-            {username === undefined ? 
+            {username !== undefined ? 
             (
             <div>
             <Button style={{'marginTop':'20px'}} bsStyle="success" bsSize="lg" onClick={()=>browserHistory.push('/mybooks')}>
