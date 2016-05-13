@@ -7,6 +7,9 @@ require('../../styles/index.scss');
 class MyTradesScreen extends Component {
     render() {
         const { mytrades } = this.props
+        // if (mytrades === undefined) {
+        //     mytrades = [];
+        // }
         return (
         <div style={{'marginLeft':'10px'}}>
          <h2 className="mainLayout">Proposed Trades</h2>

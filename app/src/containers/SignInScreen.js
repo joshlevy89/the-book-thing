@@ -15,7 +15,10 @@ render() {
     else var url = 'http://127.0.0.1:3000/';
     return (
          <div className="mainLayout" style={{'textAlign':'center', 'marginTop':'100px'}}>
-            <h2 style={{"marginBottom":'20px'}}>The Book Thing</h2>
+            { username === undefined ? 
+                <h2 style={{"marginBottom":'20px'}}>The Book Thing</h2>:
+                <h2 style={{"marginBottom":'20px'}}>{'Welcome '+ username + '!'}</h2>
+            }
             <a href={url+'auth/twitter/'}>
             <Button bsStyle="primary" bsSize="lg">Sign in with Twitter
             <i style={{'marginLeft':'5px'}} className="fa fa-twitter"></i>
