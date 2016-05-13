@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { update_books } from '../actions';
+import { update_books, get_user_info } from '../actions';
 import { Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 require('../../styles/index.scss');
 
 
 class SignInScreen extends Component {    
+
+componentDidMount() {
+    const { dispatch } = this.props
+    const urlUsername = this.props.params.urlUsername
+    if (urlUsername !== undefined) {
+    // get user info
+    dispatch(get_user_info(urlUsername));
+    }
+}
     
 render() {
-    const { username } = this.props
+    const { username } = this.props   
+
     var isProduction = process.env.NODE_ENV === 'production';
     if (isProduction) var url = 'https://the-book-thing.herokuapp.com/';
     else var url = 'http://127.0.0.1:3000/';

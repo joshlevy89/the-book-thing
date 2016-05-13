@@ -15,6 +15,7 @@ module.exports = (
 <Route path ="/" component={NavBar}>
 	<IndexRoute component={SignInScreen} />
     <Route path="/signin" component={SignInScreen}/>
+    <Route path="/signin/:urlUsername" component={SignInScreen}/>
     <Route path="/books" component={BooksScreen}/>
     <Route path="/mybooks" component={MyBooksScreen}/>
     <Route path="/propose-trade/:bookId" component={ProposeTradeScreen}/>

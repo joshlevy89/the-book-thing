@@ -4,8 +4,8 @@ var User = require('../controllers/user.js')
 
 
 
-module.exports = function(app, db, io) {
-	var authentication = new Authentication(app,io)
+module.exports = function(app, db, io,socket,passport) {
+	var authentication = new Authentication(app,io,socket,passport)
 	var book_actions = new Book_Actions(app,db,io)
 	var user = new User(app,db)
 
@@ -14,6 +14,9 @@ module.exports = function(app, db, io) {
 
 	app.route('/auth/twitter/return')
 		.get(authentication.twitter_callback)
+
+	//app.route('/profile')
+	//	.get(authentication.twitter_profile)
 		
 	app.route('/get_all_books')
 		.get(book_actions.get_all_books)

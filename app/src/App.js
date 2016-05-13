@@ -23,14 +23,6 @@ var socket = io.connect('/');
 socket.on('book_added', function(data) {
   store.dispatch(receive_book(data.book))
 });
-socket.on('got_user_info', function(data) {
-   store.dispatch(update_books());
-   store.dispatch(update_user_info(data.user));
-   store.dispatch(update_mybooks());
-   store.dispatch(update_mytrades());
-   store.dispatch(update_trade_offers());
-   store.dispatch(retrieve_user_details());
-});
 socket.on('trade_added', function(data) {
   store.dispatch(receive_trade(data.trade))
 });

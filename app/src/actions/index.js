@@ -1,3 +1,18 @@
+export function get_user_info(username) {
+  var user = {
+    username: username
+  }
+  return (dispatch) => {
+   dispatch(update_books());
+   dispatch(update_user_info(user));
+   dispatch(update_mybooks());
+   dispatch(update_mytrades());
+   dispatch(update_trade_offers());
+   dispatch(retrieve_user_details());
+}
+}
+
+
 export function update_user_details(fieldName,value){
     return (dispatch,getState) => {
      const body = {
