@@ -4,7 +4,7 @@ var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
 
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
 var isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
