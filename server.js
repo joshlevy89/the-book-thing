@@ -23,8 +23,10 @@ var port = Number(process.env.PORT || 3000);
 
 const isDevMode = (process.env.NODE_ENV !== 'production');
 
+
 app.use('/',express.static(publicPath));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb'}));
 app.use(cors());
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
